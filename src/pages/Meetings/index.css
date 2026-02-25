@@ -1,0 +1,524 @@
+/* ======================================
+   GLOBAL STYLES & VARIABLES
+   ====================================== */
+
+:root {
+    /* Color Palette */
+    --dark-blue: #1a2942;
+    --dark-blue-light: #2d3e5f;
+    --navy: #0f1e3a;
+    --light-blue: #e8f1ff;
+    --lighter-blue: #f5f9ff;
+
+    --golden: #fbbf24;
+    --golden-bright: #fcd34d;
+    --golden-dark: #f59e0b;
+    --golden-light: #fef3c7;
+
+    --white: #ffffff;
+    --off-white: #f8fafc;
+    --text-dark: #1e293b;
+    --text-gray: #64748b;
+    --text-light: #94a3b8;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #2d3e5f 0%, #1a2942 100%);
+    --gradient-golden: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    --gradient-light: linear-gradient(135deg, #f5f9ff 0%, #e8f1ff 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --shadow-golden: 0 4px 20px rgba(251, 191, 36, 0.3);
+}
+
+/* ======================================
+   MAIN CONTENT & MEETING CARD
+   ====================================== */
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    background: var(--off-white);
+}
+
+/* Card shell */
+.meeting-card {
+    width: 100%;
+    max-width: 720px;
+    min-height: 400px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    animation: cardEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Animated background gradient */
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+        rgba(251, 191, 36, 0.15) 0%,
+        rgba(139, 92, 246, 0.15) 50%,
+        rgba(59, 130, 246, 0.15) 100%);
+    animation: gradientShift 8s ease infinite;
+    pointer-events: none;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translateX(0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(20px);
+    }
+}
+
+/* Floating particles */
+.particle {
+    position: absolute;
+    background: rgba(251, 191, 36, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 6s ease-in-out infinite;
+}
+
+.particle:nth-child(2) {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+    background: rgba(139, 92, 246, 0.3);
+}
+
+.particle:nth-child(4) {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 70%;
+    animation-delay: 4s;
+    background: rgba(59, 130, 246, 0.3);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.6;
+    }
+}
+
+/* Two-column interior grid */
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 35px 45px;
+}
+
+/* Left column */
+.left-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    animation: slideInLeft 0.6s ease 0.2s both;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+    animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% { box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3); }
+    50%      { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.6); }
+}
+
+.logo svg {
+    width: 22px;
+    height: 22px;
+    fill: #0f172a;
+}
+
+.brand-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fbbf24;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.event-badge {
+    display: inline-block;
+    width: fit-content;
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    padding: 5px 14px;
+    border-radius: 18px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    animation: slideInLeft 0.6s ease 0.3s both;
+}
+
+/* Scoped so it doesn't bleed into other h1 / .title rules */
+.meeting-card .title {
+    font-size: 25px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: slideInLeft 0.6s ease 0.4s both;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: #94a3b8 !important;
+    margin-bottom: 20px;
+    animation: slideInLeft 0.6s ease 0.5s both;
+}
+
+/* Right column */
+.right-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    animation: slideInRight 0.6s ease both;
+}
+
+.info-card:nth-child(1) { animation-delay: 0.4s; }
+.info-card:nth-child(2) { animation-delay: 0.5s; }
+.info-card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.info-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(-5px);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.icon-wrapper {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icon-wrapper.calendar {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+.icon-wrapper.time {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.icon-wrapper.location {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.icon-wrapper svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+}
+
+.info-content {
+    flex: 1;
+}
+
+.info-label {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #0f172a;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+    margin-top: 8px;
+    animation: slideInRight 0.6s ease 0.7s both;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(251, 191, 36, 0.5);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+.cta-button svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Decorative corner glows */
+.corner-accent {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.corner-accent.top-right {
+    top: -75px;
+    right: -75px;
+    background: #fbbf24;
+}
+
+.corner-accent.bottom-left {
+    bottom: -75px;
+    left: -75px;
+    background: #8b5cf6;
+}
+
+/* ======================================
+   RESPONSIVE DESIGN
+   ====================================== */
+
+/* Tablets */
+@media (max-width: 992px) {
+    .section-padding {
+        padding: 70px 0;
+    }
+
+    .banner-title {
+        font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.3rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .benefits-list {
+        gap: 10px;
+    }
+
+    .benefit-item {
+        padding: 15px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .logo-showcase {
+        padding: 30px;
+    }
+
+    .main-logo {
+        max-width: 250px;
+    }
+
+    .text-center.text-md-start,
+    .text-center.text-md-end {
+        text-align: center !important;
+    }
+
+    .back-to-top {
+        margin-top: 15px;
+    }
+
+    /* Meeting card — stack to single column */
+    .main-content {
+        padding: 50px 16px;
+    }
+
+    .meeting-card {
+        min-height: auto;
+    }
+
+    .content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 30px;
+    }
+
+    .meeting-card .title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 576px) {
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .mvv-card {
+        padding: 30px 20px;
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    /* Meeting card — tighter on tiny screens */
+    .main-content {
+        padding: 40px 12px;
+    }
+
+    .content-wrapper {
+        padding: 30px 20px;
+        gap: 24px;
+    }
+
+    .meeting-card .title {
+        font-size: 24px;
+    }
+
+    .info-card {
+        padding: 12px 16px;
+    }
+
+    .cta-button {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
