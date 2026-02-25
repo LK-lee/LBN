@@ -1,0 +1,59 @@
+label{
+    font-weight: bold !important;
+}
+
+/* .fixed-bottom {
+
+position: fixed;
+    z-index: 1030;
+    right: 50px;
+    bottom: 0;
+    left: 100px;
+} */
+
+
+/* =========================
+   Dashboard Footer
+========================= */
+
+.dashboard-footer {
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+  padding: 1rem 1.5rem;
+}
+
+/* Ensure main content uses flex layout */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Highlight: Footer sticks to bottom */
+.main-content .container-fluid {
+  flex: 1;
+  
+}
+
+/* =============================== */
+.main-content,
+.dashboard-footer {
+  transition: margin-left 0.3s ease, width 0.3s ease;
+   
+}
+
+
+.dashboard-footer {
+    /* margin-top: 9rem; */
+  }
+    /* =============  mobile responsice =============== */
+@media (max-width: 768px) {
+  .dashboard-footer {
+    text-align: center;
+  }
+
+  .dashboard-footer .nav-footer {
+    justify-content: center !important;
+  }
+}
